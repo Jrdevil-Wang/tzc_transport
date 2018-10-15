@@ -7,12 +7,21 @@ A more detailed report can be found: https://arxiv.org/pdf/1810.00556.pdf
 
 Directory description:
 /example:
-    code example using TZC
+
+    Code examples using TZC.
+
 /include/tzc_transport:
-    core TZC code
+
+    Core TZC code.
+
 /include/sensor_msgs: 
-    example of generated message header file
+
+    Example of generated message header file.
+
 /scripts:
-    message generator
+
+    The TZC message generator.
+
 /templates:
-    template file used by message generator
+
+    The template file used by message generator.
