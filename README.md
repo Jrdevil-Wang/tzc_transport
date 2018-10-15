@@ -6,22 +6,13 @@ We propose an efficient IPC technique called TZC (Towards Zero-Copy). As a core 
 A more detailed report can be found: https://arxiv.org/pdf/1810.00556.pdf
 
 Directory description:
-/example:
 
-    Code examples using TZC.
+/example: Code examples using TZC.
 
-/include/tzc_transport:
+/include/tzc_transport: Core TZC code.
 
-    Core TZC code.
+/include/sensor_msgs: Example of generated message header file.
 
-/include/sensor_msgs: 
+/scripts: The TZC message generator.
 
-    Example of generated message header file.
-
-/scripts:
-
-    The TZC message generator.
-
-/templates:
-
-    The template file used by message generator.
+/templates: The template file used by message generator.
