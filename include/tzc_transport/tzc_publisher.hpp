@@ -52,6 +52,13 @@ public:
     if (ptr) {
       msg.fillArray(pobj_->convertAddress2Handle(ptr), ptr);
       msg.magic_ = ptr->magic_ = rand();
+
+      //link the head of shm
+      msg.pmsg_ = pobj_ -> pmsg_;
+      msg.pmsg_ -> take();
+      msg.name_ = pobj_ -> getName();
+      msg.pshm_ = pobj_ -> pshm_;
+
       pobj_->addLast(ptr);
     }
     return (ptr != NULL);
