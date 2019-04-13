@@ -31,6 +31,13 @@ public:
     return Subscriber< M >(sub, phlp);
   }
 
+  template < class M, class T >
+  Subscriber< M > subscribe(const std::string & topic, uint32_t queue_size, void (T::*fp)(const boost::shared_ptr< const M > &), T* obj) {
+    SubscriberCallbackHelper< M > * phlp = new SubscriberCallbackHelper< M >(topic, boost::bind(fp, obj, _1));
+    ros::Subscriber sub = nh_.subscribe(topic, queue_size, &SubscriberCallbackHelper< M >::callback, phlp, ros::TransportHints().tcpNoDelay());
+    return Subscriber< M >(sub, phlp);
+  }
+
 private:
   ros::NodeHandle nh_;
 

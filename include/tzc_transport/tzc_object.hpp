@@ -132,6 +132,10 @@ public:
     return pshm_->get_handle_from_address(p);
   }
 
+  const std::string& getName() const{
+      return name_;
+  }
+
   // in shm, message list and ref count (pub # + sub #)
   ShmMessage * pmsg_;
 
@@ -149,23 +153,22 @@ typedef boost::shared_ptr< ShmObject > ShmObjectPtr;
 
 class BaseMsg {
 public:
-  BaseMsg() : shmmsg_(NULL) {
+  BaseMsg() : 
+      shmmsg_(NULL),
+      pmsg_(NULL),
+      pshm_(NULL) 
+  {
   }
 
   BaseMsg(const BaseMsg & m) {
-    handle_ = m.handle_;
-    magic_ = m.magic_;
-
-    if (m.shmmsg_)
-      m.shmmsg_->take();
-    if (shmmsg_)
-      shmmsg_->release();
-    shmmsg_ = m.shmmsg_;
+      *this = m;
   }
 
   ~BaseMsg() {
     if (shmmsg_)
       shmmsg_->release();
+    if(pmsg_ && pmsg_->release() == 1)
+        boost::interprocess::shared_memory_object::remove(name_.c_str());
   }
 
   BaseMsg & operator = (const BaseMsg & m) {
@@ -174,10 +177,16 @@ public:
 
     if (m.shmmsg_)
       m.shmmsg_->take();
+    if(m.pmsg_)
+        m.pmsg_->take();
     if (shmmsg_)
       shmmsg_->release();
-    shmmsg_ = m.shmmsg_;
+    if(pmsg_)
+        pmsg_->release();
 
+    shmmsg_ = m.shmmsg_;
+    pmsg_ = m.pmsg_;
+    pshm_ = m.pshm_;
     return *this;
   }
 
@@ -185,6 +194,13 @@ protected:
   long         handle_;
   long         magic_;
   ShmMessage * shmmsg_;
+
+  //the head of the shm list
+  ShmMessage * pmsg_;
+  ShmManagerPtr pshm_;
+
+  // name of shm
+  std::string name_;
 
 friend class ::ros::serialization::Serializer< BaseMsg >;
 
