@@ -14,7 +14,7 @@ class Subscriber;
 template < class M >
 class SubscriberCallbackHelper
 {
-  typedef void (*Func)(const typename M::ConstPtr &);
+  typedef const boost::function<void (const typename M::ConstPtr &)> Func;
 
 public:
   ~SubscriberCallbackHelper() {
