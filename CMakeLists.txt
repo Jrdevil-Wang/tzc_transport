@@ -126,7 +126,7 @@ include_directories(
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/tzc_transport.cpp
 # )
-add_library(tzc tzc.cpp)
+add_library(tzcWrap python/tzcWrap.cpp)
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -144,7 +144,7 @@ add_executable(${PROJECT_NAME}_sub example/tzc_sub.cpp)
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 set_target_properties(${PROJECT_NAME}_pub PROPERTIES OUTPUT_NAME pub PREFIX "")
 set_target_properties(${PROJECT_NAME}_sub PROPERTIES OUTPUT_NAME sub PREFIX "")
-set_target_properties(tzc PROPERTIES PREFIX "" LIBRARY_OUTPUT_DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_PYTHON_DESTINATION})
+set_target_properties(tzcWrap PROPERTIES OUTPUT_NAME tzc PREFIX "" LIBRARY_OUTPUT_DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_PYTHON_DESTINATION})
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -161,7 +161,7 @@ target_link_libraries(${PROJECT_NAME}_sub
   -lrt
 )
 
-target_link_libraries(tzc ${catkin_LIBRARIES} ${Boost_LIBRARIES})
+target_link_libraries(tzcWrap ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 #############
 ## Install ##
 #############
