@@ -161,6 +161,7 @@ target_link_libraries(${PROJECT_NAME}_sub
   -lrt
 )
 
+target_link_libraries(tzc ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 #############
 ## Install ##
 #############
