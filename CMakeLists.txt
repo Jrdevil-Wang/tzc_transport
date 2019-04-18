@@ -14,11 +14,13 @@ find_package(catkin REQUIRED COMPONENTS
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 find_package(Boost REQUIRED)
+find_package(Boost REQUIRED COMPONENTS python)
+find_package(PythonLibs 2.7 REQUIRED)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
 ## See http://ros.org/doc/api/catkin/html/user_guide/setup_dot_py.html
-# catkin_python_setup()
+catkin_python_setup()
 
 ################################################
 ## Declare ROS messages, services and actions ##
@@ -116,13 +118,15 @@ catkin_package(
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+  ${PYTHON_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/tzc_transport.cpp
 # )
-
+add_library(tzcWrap python/tzcWrap.cpp)
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -140,6 +144,7 @@ add_executable(${PROJECT_NAME}_sub example/tzc_sub.cpp)
 ## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
 set_target_properties(${PROJECT_NAME}_pub PROPERTIES OUTPUT_NAME pub PREFIX "")
 set_target_properties(${PROJECT_NAME}_sub PROPERTIES OUTPUT_NAME sub PREFIX "")
+set_target_properties(tzcWrap PROPERTIES OUTPUT_NAME tzc PREFIX "" LIBRARY_OUTPUT_DIRECTORY ${CATKIN_DEVEL_PREFIX}/${CATKIN_PACKAGE_PYTHON_DESTINATION})
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -156,6 +161,7 @@ target_link_libraries(${PROJECT_NAME}_sub
   -lrt
 )
 
+target_link_libraries(tzcWrap ${catkin_LIBRARIES} ${Boost_LIBRARIES})
 #############
 ## Install ##
 #############
