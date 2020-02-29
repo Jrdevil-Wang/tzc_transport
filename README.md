@@ -15,3 +15,25 @@ Directory description:
   <tr> <td>/scripts</td> <td>The TZC message generator.</td> </tr>
   <tr> <td>/templates</td> <td>The template file used by message generator.</td> </tr>
 </table>
+
+If you are interested, please cite this work as:
+
+@inproceedings{DBLP:conf/iros/0001THM019,
+  author    = {Yu{-}Ping Wang and
+               Wende Tan and
+               Xu{-}Qiang Hu and
+               Dinesh Manocha and
+               Shi{-}Min Hu},
+  title     = {{TZC:} Efficient Inter-Process Communication for Robotics Middleware
+               with Partial Serialization},
+  booktitle = {2019 {IEEE/RSJ} International Conference on Intelligent Robots and
+               Systems, {IROS} 2019, Macau, SAR, China, November 3-8, 2019},
+  pages     = {7805--7812},
+  publisher = {{IEEE}},
+  year      = {2019},
+  url       = {https://doi.org/10.1109/IROS40897.2019.8968462},
+  doi       = {10.1109/IROS40897.2019.8968462},
+  timestamp = {Fri, 31 Jan 2020 13:28:16 +0100},
+  biburl    = {https://dblp.org/rec/conf/iros/0001THM019.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
