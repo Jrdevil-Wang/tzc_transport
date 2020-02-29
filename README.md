@@ -16,8 +16,9 @@ Directory description:
   <tr> <td>/templates</td> <td>The template file used by message generator.</td> </tr>
 </table>
 
-If you are interested, please cite this work as:
+If you are interested, please cite our IROS 2019 paper:
 
+```
 @inproceedings{DBLP:conf/iros/0001THM019,
   author    = {Yu{-}Ping Wang and
                Wende Tan and
@@ -37,3 +38,4 @@ If you are interested, please cite this work as:
   biburl    = {https://dblp.org/rec/conf/iros/0001THM019.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
+```
